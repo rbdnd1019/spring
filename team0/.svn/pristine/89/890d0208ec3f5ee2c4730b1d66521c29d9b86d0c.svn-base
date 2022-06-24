@@ -1,0 +1,52 @@
+package com.inadang.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.inadang.domain.Order;
+import com.inadang.domain.OrderMenu;
+import com.inadang.mapper.OrderMapper;
+import com.inadang.mapper.OrderMenuMapper;
+
+import lombok.AllArgsConstructor;
+
+@Service @AllArgsConstructor 
+public class OrderServiceImpl implements OrderService{
+	private OrderMapper orderMapper;
+	private OrderMenuMapper orderMenuMapper; 
+	
+	public List<Order> getList() {
+		return orderMapper.getList();
+	}
+
+	@Override
+	public Order get(String ono) {
+		return orderMapper.get(ono);
+	}
+
+	@Override
+	@Transactional
+	public void insert(Order order, OrderMenu om) {
+		orderMapper.insert(order);
+		om.setOno(order.getOno());
+		orderMenuMapper.insert(om);
+	}
+
+	@Override
+	public boolean updateAmount(String ono) {
+		return orderMapper.updateAmount(ono) > 0;
+	}
+
+	@Override
+	public boolean delete(String ono) {
+		return orderMapper.delete(ono) > 0 ;
+	}
+
+	@Override //상태만 취소로 변경
+	public boolean cancel(String status) {
+		return orderMapper.cancel(status) > 0;
+	}
+
+}

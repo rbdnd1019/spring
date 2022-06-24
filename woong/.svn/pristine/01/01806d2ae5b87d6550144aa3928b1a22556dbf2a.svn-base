@@ -1,0 +1,72 @@
+package com.inadang.mapper;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.inadang.domain.Orders;
+
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+public class OrdersMapperTests {
+	
+	@Setter @Autowired
+	private OrdersMapper mapper;
+	
+	@Test
+	public void exist(){
+		assertNotNull(mapper);
+		log.info(mapper);
+	}
+	
+	
+	@Test
+	public void getListTests(){
+//		ono, id, name, menu, count, price, pickup
+		List<Orders> list = mapper.getList();
+		log.info(list);
+		assertNotNull(list);
+	}
+		
+	@Test
+	public void testInsert(){
+		Orders orders = new Orders();
+		orders.setOno("ORD1651351086100");
+		orders.setId("javaboy");
+		orders.setName("BBQ 영등포점");
+		orders.setMenu("후라이드치킨");
+		orders.setCount(1);
+		orders.setPrice(20000);
+		orders.setAmount(20000);
+		orders.setPickup(true);
+		
+		int exp = 1;
+		int result = mapper.insert(orders);
+		
+		assertEquals("주문완료", exp, result);
+		log.info(orders);
+	}
+	
+	@Test 
+	public void testRemove(){
+		String ono = "ORD1651351086100";
+		
+		int exp = 1;
+		int result = mapper.remove(ono);
+		
+		assertEquals("주문삭제", exp, result);
+		log.info(ono);
+	}
+		
+}

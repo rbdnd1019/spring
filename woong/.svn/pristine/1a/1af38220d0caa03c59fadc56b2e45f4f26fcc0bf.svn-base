@@ -1,0 +1,37 @@
+package com.inadang.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/*"장바구니에서 주문요청시 발생
+(주문번호, 메뉴이름, 가격, 주소, 배달요청닉네임, 요청사항, 고객연락처)"
+1. 사용자가 최근에 주문한 현재 배달중인 주문조회(예상도착시간, 주문번호, 가게이름, 메뉴이름, 가격, 주소, 매장번호, 요청사항)
+"3. 사장님 매장에 들어왔던 주문 조회 
+(주문번호, 메뉴이름, 가격, 주소, 배달요청닉네임, 요청사항, 고객연락처)"
+주문이 들어온 내용을 보고 수락, 거절(사유작성), 배달완료로 바꿀 수 있다
+"결제이후 ~ 사장님 주문 승인 버튼 클릭 이전 시기에 사용자가 취소
+(결제도 취소되어야한다)"
+"장바구니에 담겨있던 목록들을 결제 화면으로 보낸다.
+결제가 이루어지면 주문서비스에 주문이 이루어지며, 사장님의 배달관리에 장바구니리스트가 보내진다. 
+사장님이 주문 승인시 해당 주문은 주문생성으로 보내진다."
+
+가게고유번호, 주문번호(단, 사용자 인증완료 후에는 재사용 불가), 
+사용자id, 결제요청유형, 결제금액, 결제 한 건에 대한 고유번호, 
+결제 준비 API가 성공적으로 호출되면 발급되는 코드(20자리), 
+결제완료여부auth, 결제시간(timeStamp)
+*/
+
+@Data @NoArgsConstructor @AllArgsConstructor
+public class Orders {
+	private String ono;
+	private String id;
+	private String name;
+	private String menu;
+	private int count;
+	private int price;
+	private int amount;
+	private boolean pickup;
+	private String orderDate;
+	private Long omno;
+}

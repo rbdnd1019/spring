@@ -1,0 +1,35 @@
+package com.inadang.service;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.inadang.domain.Orders;
+
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+public class OrdersServiceTests {
+	@Setter @Autowired
+	OrderService orderService;
+	
+	
+	@Test
+	public void testExist(){
+		assertNotNull(orderService);
+	}
+	
+	@Test
+	public void testGet(){
+		Orders orders = new Orders();
+		orders.setOno("ORD1651351086995");
+		log.info(orderService.get(orders.getOno()));
+	}
+}

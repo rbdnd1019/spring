@@ -1,0 +1,36 @@
+package com.inadang.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.inadang.domain.Payments;
+import com.inadang.mapper.PaymentsMapper;
+
+import lombok.AllArgsConstructor;
+
+@Service @AllArgsConstructor 
+public class PaymentsServiceImpl implements PaymentsService{
+	
+	private PaymentsMapper mapper;
+	
+	@Override
+	public int insert(Payments payments) {
+		return mapper.insert(payments);
+	}
+
+	@Override
+	public Payments get(String pno) {
+		return mapper.get(pno);
+	}
+
+	@Override
+	public List<Payments> getList() {
+		return mapper.getList();
+	}
+
+	@Override
+	public int remove(String pno) {
+		return mapper.remove(pno);
+	}
+}

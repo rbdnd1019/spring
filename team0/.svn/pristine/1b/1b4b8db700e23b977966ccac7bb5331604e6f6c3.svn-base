@@ -1,0 +1,15 @@
+package com.inadang.mapper;
+
+import java.util.List;
+
+import com.inadang.domain.Payments;
+
+public interface PaymentsMapper {
+	public Payments get(String pno);
+	
+	public List<Payments> getList();
+	
+	public int insert(Payments payments);
+	
+	public int remove(String pno);
+}

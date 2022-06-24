@@ -1,0 +1,12 @@
+package com.inadang.service;
+
+import com.inadang.domain.MemberVO;
+
+public interface MemberService {
+
+	void join(MemberVO vo);
+	
+	
+	
+
+}

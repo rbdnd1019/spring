@@ -1,0 +1,19 @@
+package com.inadang.domain;
+
+import org.apache.ibatis.type.Alias;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @AllArgsConstructor @NoArgsConstructor
+@Alias("review")
+public class Review {
+	private Long rno;
+	private String id;
+	private Long sno;
+	private String content;
+	private Double scope;
+	
+	private Long groupId;
+}

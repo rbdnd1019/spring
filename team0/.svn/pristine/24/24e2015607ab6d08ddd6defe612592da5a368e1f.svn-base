@@ -1,0 +1,15 @@
+package com.inadang.service;
+
+import java.util.List;
+
+import com.inadang.domain.Payments;
+
+public interface PaymentsService {
+	int insert(Payments payments);
+	
+	Payments get (String pno);
+	
+	List<Payments> getList();
+	
+	int remove(String pno);
+}

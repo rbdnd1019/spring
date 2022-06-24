@@ -1,0 +1,13 @@
+package edu.biz.setter2;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class DevelopeApp {
+	static Develope develope;
+	public static void main(String[] args) {
+		new ClassPathXmlApplicationContext("setter2.xml").getBean("develope", Develope.class).coding();
+	}
+}

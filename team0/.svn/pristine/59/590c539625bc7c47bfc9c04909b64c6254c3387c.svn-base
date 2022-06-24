@@ -1,0 +1,20 @@
+package com.inadang.service;
+
+import com.inadang.domain.MemberVO;
+
+public interface MemberService {
+
+	void insertMember(MemberVO vo);
+	
+	
+	
+	MemberVO get(String id);
+	
+	boolean update(MemberVO vo);
+	
+	boolean delete(String id);
+
+
+	
+
+}

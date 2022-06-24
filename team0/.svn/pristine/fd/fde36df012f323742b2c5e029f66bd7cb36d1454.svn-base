@@ -1,0 +1,22 @@
+package com.inadang.service;
+
+import java.util.List;
+
+import com.inadang.domain.Cart;
+
+public interface CartService {
+	
+	void addCart(Long mno, int count, String id);
+	
+	int checkCart(Long mno, String id); // 중복 체크
+
+	Cart get(Long cno);
+	
+	int deleteCart(Long cno, String id);
+	
+	void dropCart(String id);
+	
+	List<Cart> list(String id);
+	
+	Cart getLastCno(String id);
+}

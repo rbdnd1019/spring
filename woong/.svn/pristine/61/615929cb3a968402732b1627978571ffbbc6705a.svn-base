@@ -1,0 +1,42 @@
+package com.inadang.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.inadang.domain.Store;
+import com.inadang.service.StoreService;
+import com.inadang.service.StoreServiceImpl;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Controller
+@AllArgsConstructor
+@Log4j
+@RequestMapping("store/*")
+public class StoreController {
+	private final StoreService storeService;
+	
+	//list
+	@GetMapping("list") 
+	public void list(Model model) {
+		List<Store> list = storeService.list();
+		
+		for(Store s : list) {
+			s.setLogo(storeService.selectLogo(s.getSno()).getOrigin());
+			log.info(s.getLogo());
+		}
+		model.addAttribute("stores", list);
+		
+	}
+	
+	// detail
+	@GetMapping("detail") 
+	public void detail() {
+		
+	}
+}

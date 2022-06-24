@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.MemberMapper">
+  	<insert id="insertMember">
+		INSERT INTO TBL_MEMBER(ID, PASSWORD, NAME, TEL, EMAIL, NICKNAME, BOSS_NAME) 
+		VALUES (#{id}, #{password}, #{name}, #{tel}, #{email}, #{nickname}, #{boss_name}) 
+  	</insert>
+  	
+  	<insert id="insertAuth">
+  		INSERT INTO TBL_MEMBER_AUTH VALUES (#{id}, #{auth});
+  	</insert>
+  
+  </mapper>

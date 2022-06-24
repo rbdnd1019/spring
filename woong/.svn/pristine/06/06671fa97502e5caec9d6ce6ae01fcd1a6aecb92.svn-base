@@ -1,0 +1,32 @@
+package com.inadang.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.inadang.domain.Store;
+import com.inadang.domain.StoreAttach;
+import com.inadang.mapper.StoreMapper;
+
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+@Service @AllArgsConstructor
+public class StoreServiceImpl implements StoreService{
+	@Autowired @Setter
+	StoreMapper mapper;
+	
+	
+	@Override
+	public List<Store> list() {
+		return mapper.selectAll();
+	}
+
+
+	@Override
+	public StoreAttach selectLogo(Long sno) {
+		return mapper.selectLogo(sno);
+	}
+	
+	
+}

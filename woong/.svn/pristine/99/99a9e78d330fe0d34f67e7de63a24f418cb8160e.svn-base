@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.inadang.mapper.PaymentsMapper">
+	<select id="getList" resultType="payments">
+		<![CDATA[
+			SELECT * FROM TBL_PAYMENTS WHERE PNO > 0
+		]]>
+	</select>
+	
+	<select id="get" resultType="payments">
+		<![CDATA[
+			SELECT * FROM TBL_PAYMENTS WHERE PNO = #{pno}
+		]]>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbl_payments (pno, ono, id, amount, name, email, impUid, payMethod, applyNum, quota, status) 
+		VALUES (seq_payments.nextval, #{ono}, #{id}, #{amount},	#{name}, #{email}, #{impUid}, #{payMethod}, #{applyNum}, #{quota}, #{status})
+	</insert>
+	
+	<delete id="remove">
+		DELETE tbl_payments where pno = #{pno}
+	</delete>
+	  
+  </mapper>

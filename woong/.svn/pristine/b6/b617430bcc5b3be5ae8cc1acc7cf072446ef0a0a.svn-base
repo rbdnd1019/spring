@@ -1,0 +1,69 @@
+package com.inadang.controller;
+
+import java.io.IOException;
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.inadang.domain.Payments;
+import com.inadang.service.OrderMenuService;
+import com.inadang.service.OrderService;
+import com.inadang.service.PaymentsService;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Controller
+@AllArgsConstructor
+@RequestMapping("order/*")
+@Log4j
+public class OrderController {
+	private final PaymentsService paymentService; 
+	private final OrderService orderService;
+	private final OrderMenuService orderMenuService;
+	
+	@GetMapping ("payments")
+	public void order(@RequestParam("ono") String ono, Model model){
+		model.addAttribute("orderMenu", orderMenuService.findBy(ono));
+		model.addAttribute("order", orderService.get(ono));
+		log.info(ono);
+	}
+	
+	@PostMapping("payments") 
+	public String payments(Payments payments, RedirectAttributes rttr){
+		log.info(payments);
+		paymentService.insert(payments);
+		rttr.addFlashAttribute("data", payments.getOno());
+		return "redirect:/order/history";
+	}
+
+	
+
+	//IAMPORT API
+	@ResponseBody
+	@RequestMapping(value="/history/{imp_uid}")
+	public IamportResponse<Payment> paymentByImpUid(
+			Model model
+			, Locale locale
+			, HttpSession session
+			, @PathVariable(value= "imp_uid") String imp_uid) throws IamportResponseException, IOException
+	{	
+		// REST API 키와 REST API secret 를 아래처럼 순서대로 입력한다.
+		IamportClient api = new IamportClient("3036721238050964","ab08095efeceb5826011a8f75016182bc8065fa2093e2435ccebfd05083238ae3f34017a42ff1fa0");
+		return api.paymentByImpUid(imp_uid);
+	}
+}

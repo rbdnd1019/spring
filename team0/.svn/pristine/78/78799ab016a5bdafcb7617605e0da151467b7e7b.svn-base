@@ -1,0 +1,50 @@
+package com.inadang.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.inadang.domain.Payments;
+import com.inadang.mapper.PaymentsMapper;
+import com.siot.IamportRestClient.response.Payment;
+import com.siot.IamportRestClient.response.PaymentCancelDetail;
+
+import lombok.AllArgsConstructor;
+
+@Service @AllArgsConstructor 
+public class PaymentsServiceImpl implements PaymentsService{
+	
+	private PaymentsMapper mapper;
+	
+	@Override
+	public int insert(Payments payments) {
+		return mapper.insert(payments);
+	}
+
+	@Override
+	public Payments get(Long pno) {
+		return mapper.get(pno);
+	}
+
+	@Override
+	public List<Payments> getList() {
+		return mapper.getList();
+	}
+
+	@Override
+	public int remove(String pno) {
+		return mapper.remove(pno);
+	}
+
+	@Override
+	public void pay1(Payment payment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pay(PaymentCancelDetail cancelDetail) {
+		// TODO Auto-generated method stub
+		
+	}
+}

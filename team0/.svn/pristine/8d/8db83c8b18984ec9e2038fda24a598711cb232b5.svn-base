@@ -1,0 +1,56 @@
+package com.inadang.domain;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import org.apache.ibatis.type.Alias;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.annotations.SerializedName;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/*가게고유번호, 주문번호(단, 사용자 인증완료 후에는 재사용 불가), 
+ * 사용자id, 결제요청유형, 결제금액, 결제 한 건에 대한 고유번호, 
+ * 결제 준비 API가 성공적으로 호출되면 발급되는 코드(20자리), 
+ * 결제완료여부auth, 결제시간(timeStamp)
+ * */
+@Data 
+public class Payments {
+	
+	private String pno; //결제시퀀스
+	
+	@SerializedName("apply_num") 
+	private String ono;
+
+	@SerializedName("customer_uid")
+    private String id;
+
+    @SerializedName("amount")
+    private int amount; //BigDecimal?
+
+    private String name; //가게명
+    
+    @SerializedName("buyer_email")
+    private String email;
+    
+    @SerializedName("merchant_uid")
+    private String impUid;
+
+    @SerializedName("pay_method")
+    private String payMethod;
+    
+    private int applyNum;
+    
+    @SerializedName("card_quota")
+    private int quota; //할부
+    
+    private String status;
+
+    private String timeStamp;
+    
+    private String cancleDate;
+}

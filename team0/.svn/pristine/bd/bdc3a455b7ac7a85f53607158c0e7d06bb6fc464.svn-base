@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<jsp:include page="../common/head.jsp"/>
+</head>
+<body style="background-color : white;">
+<jsp:include page="../common/nav.jsp"></jsp:include>
+	<div class="row" style="border:1px solid;">
+		<div class="col-3" id="nav">
+			<jsp:include page="../store/sidebar.jsp"></jsp:include>
+		</div>
+		<div class="col-9" style="display: inline-block;">
+			<a class="btn btn-primary" href="#" style="padding-top: 5px; padding-bottom: 5px;float: right; margin: 5px 55px 5px 0px">메뉴추가</a>
+			<h1 class="mine" style="margin: 0px"><span>Menu</span></h1>		
+			<div class="inGroup" style="margin: 0px 0px 5px 10px; border-bottom: 1px solid; padding: 5px">
+					
+				
+				
+			</div>	
+		</div>
+	</div>	
+<jsp:include page="../common/footer.jsp"/>
+</body>
+</html>

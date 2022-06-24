@@ -1,0 +1,69 @@
+package com.inadang.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.inadang.domain.Store;
+import com.inadang.domain.StoreAttach;
+import com.inadang.mapper.StoreAttachMapper;
+import com.inadang.mapper.StoreMapper;
+
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+@Service @AllArgsConstructor @Log4j
+public class StoreServiceImpl implements StoreService{
+	@Autowired @Setter
+	StoreMapper mapper;
+	
+	private StoreMapper storeMapper;
+	private StoreAttachMapper storeAttachMapper;
+	
+	
+	@Override
+	public List<Store> list(Long category) {
+		if(category == 0) {
+			return mapper.selectAll();
+		}
+		else return mapper.selectAllByCategory(category);
+	}
+	
+
+
+	@Override
+	public StoreAttach getLogo(Long sno) {
+		return mapper.selectLogo(sno);
+	}
+
+
+
+	
+	@Override
+	public Store get(Long sno) {
+		// TODO Auto-generated method stub
+//		storeAttachMapper.findBy(sno);
+		return storeMapper.read(sno);
+	}
+	
+	@Transactional
+	public int register(Store store) {
+		log.info("register("+ store +")");
+
+		int result = storeMapper.insertSelectKey(store);
+		
+		store.getAttachs().forEach((attach) -> {
+			attach.setSno(store.getSno());
+			storeAttachMapper.insert(attach);
+		} );
+		
+		// boardVO.bno == null
+		return result;
+	}
+
+
+
+	
+}

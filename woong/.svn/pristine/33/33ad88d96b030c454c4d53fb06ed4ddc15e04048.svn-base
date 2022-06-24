@@ -1,0 +1,72 @@
+package com.inadang.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.inadang.domain.Menu;
+import com.inadang.domain.MenuAttach;
+import com.inadang.domain.Review;
+import com.inadang.domain.ReviewAttach;
+import com.inadang.domain.Store;
+import com.inadang.service.MenuService;
+import com.inadang.service.ReviewService;
+import com.inadang.service.StoreService;
+import com.inadang.service.StoreServiceImpl;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Controller
+@AllArgsConstructor
+@Log4j
+@RequestMapping("store/*")
+public class StoreController {
+	private final StoreService storeService;
+	private final MenuService menuService;
+	private final ReviewService reviewService;
+	
+	//list
+	@GetMapping("list/{category}") 
+	public String list(Model model, @PathVariable Long category) {
+		
+		List<Store> list = storeService.list(category);
+		
+		for(Store s : list) {
+			s.setLogo(storeService.getLogo(s.getSno()).getOrigin());
+		}
+		model.addAttribute("stores", list);
+		model.addAttribute("category", category);
+		return "store/list";
+		
+	}
+	
+	// detail
+	@GetMapping("detail/{sno}")
+	public String detail(@PathVariable Long sno, Model model) {
+		Store store = storeService.get(sno);
+		store.setLogo(storeService.getLogo(sno).getOrigin());
+		model.addAttribute("store", store);
+		List<Menu> list = menuService.list(sno);
+		for(Menu m : list) {
+			m.setAttach(menuService.getAttach(m.getMno()));
+		}
+		model.addAttribute("menus", list);
+		List<Review> reviews = reviewService.list(sno);
+		
+		for(Review r : reviews) {
+			r.setAttachs(reviewService.getAttach(r.getRno()));
+		}
+		
+		
+		model.addAttribute("reviews", reviews);
+		
+		return "store/detail";
+	}
+}

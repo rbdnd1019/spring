@@ -1,0 +1,20 @@
+package com.inadang.service;
+
+import org.springframework.stereotype.Service;
+
+import com.inadang.domain.Orders;
+import com.inadang.mapper.OrdersMapper;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Service @AllArgsConstructor
+public class OrderServiceImpl implements OrderService{
+	private OrdersMapper mapper;
+	
+	@Override
+	public Orders get(String ono) {
+		return mapper.get(ono);
+	}
+ 
+}

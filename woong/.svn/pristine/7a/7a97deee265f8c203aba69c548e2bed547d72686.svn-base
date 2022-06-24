@@ -1,0 +1,9 @@
+package com.inadang.domain;
+
+import lombok.Data;
+
+@Data
+public class Like {
+	private String id;
+	private Long sno;
+}

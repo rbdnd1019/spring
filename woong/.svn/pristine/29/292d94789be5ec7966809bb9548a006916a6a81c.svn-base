@@ -1,0 +1,5 @@
+package com.inadang.domain;
+
+public class Order {
+
+}

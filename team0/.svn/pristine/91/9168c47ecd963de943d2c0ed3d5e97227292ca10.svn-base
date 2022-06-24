@@ -1,0 +1,22 @@
+package com.inadang.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+
+import com.inadang.domain.OrderMenu;
+
+public interface OrderMenuMapper {
+	
+	public List<OrderMenu> getList();
+	
+	public int insert(OrderMenu om); 
+	
+	List<OrderMenu> findBy(String ono);
+	
+	public int delete(Long mno);
+	
+	public List<OrderMenu> deleteAll(String ono);
+}

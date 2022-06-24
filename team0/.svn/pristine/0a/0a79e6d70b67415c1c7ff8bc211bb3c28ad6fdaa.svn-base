@@ -1,0 +1,83 @@
+package com.inadang.mapper;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.inadang.domain.Payments;
+
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+// 상태수정 테스트해야됨
+public class PaymentsMapperTests {
+	@Setter @Autowired
+	private PaymentsMapper mapper;
+	
+	@Test
+	public void exist(){
+		log.info(mapper);
+		assertNotNull(mapper);
+	}
+	
+	@Test
+	public void testGetList(){
+		List<Payments> result = mapper.getList();
+		assertNotNull(result);
+		result.forEach(log::info);
+	}
+	
+	@Test
+	public void testRead(){
+		Payments payments = mapper.get(6L);
+		log.info(payments);
+		assertNotNull(payments);
+	}
+	
+	@Test
+	public void testInsert(){
+		Payments payments = new Payments();
+		payments.setOno("ORD1651351087040");
+		payments.setId("fishnew");
+		payments.setAmount(22000);
+		payments.setName("지코바치킨 영등포점");
+		payments.setEmail("fifinew@gmail.com");
+		payments.setImpUid("imp_300030471510");
+		payments.setPayMethod("card");
+		payments.setApplyNum(71776455);
+		payments.setQuota(0);
+		payments.setStatus("paid");
+		payments.setPhoneNumber("01024568423");
+		payments.setPostCode(51128);
+		payments.setAddress("가나다라마사");
+		
+		int exp = 1;
+		int result = mapper.insert(payments); 
+		
+		assertEquals("결제내역추가", exp, result);
+		
+		log.info(payments);
+	}
+	
+	@Test
+	public void testRemove(){
+		String pno = "6";
+		
+		int exp = 1;
+		int result = mapper.remove(pno);
+		
+		assertEquals("결제내역삭제", exp, result);
+		log.info(pno);
+	}
+	
+}

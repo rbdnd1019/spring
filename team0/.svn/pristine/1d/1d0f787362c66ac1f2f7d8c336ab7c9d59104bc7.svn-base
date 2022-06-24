@@ -1,0 +1,20 @@
+package com.inadang.domain;
+
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+public class MemberVO {
+
+	private String id; // pk
+	private String password;
+	private String name;
+	private String tel;
+	private String email;
+	private String nickName;
+	private Date regDate;
+	private String bossName;
+	private String sno;
+	private String bno; 
+}

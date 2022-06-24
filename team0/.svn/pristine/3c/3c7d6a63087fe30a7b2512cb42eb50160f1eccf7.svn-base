@@ -1,0 +1,17 @@
+package com.inadang.mapper;
+
+import java.util.List;
+
+import com.inadang.domain.Orders;
+
+public interface OrdersMapper {
+	public List<Orders> getList();
+	
+	public Orders get(String ono);
+	
+	public List<Orders> gets(String ono);
+	
+	public int insert(Orders order);
+	
+	public int remove(String ono);
+}

@@ -1,0 +1,17 @@
+package com.inadang.mapper;
+
+import com.inadang.domain.AuthVO;
+import com.inadang.domain.MemberVO;
+
+public interface MemberMapper {
+
+	int insertMember(MemberVO vo);
+
+	MemberVO get(String id);
+	
+	boolean delete(String id);
+	
+	boolean update(MemberVO vo);
+	
+	int insertAuth(AuthVO vo);
+}

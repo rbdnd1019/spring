@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>결제내역확인</title>
+<jsp:include page="../common/head.jsp"/>
+</head>
+<body>
+<jsp:include page="../common/nav.jsp"/>
+	<div class="wrapper">
+		<div class="container">
+			<h1>주문완료</h1>
+			payments : ${payments}
+			<hr>
+			<div class="bg-light ">
+				history : ${history}
+				<hr>
+					<div class="">
+					결제번호 : ${history.pno}<br>
+					주문번호 : ${history.ono}<br>
+					결제아이디 : ${history.id}<br>
+					총금액 : ${history.amount}<br>
+					주문매장 : ${history.name}<br>
+			 		결제메일 : ${history.email}<br>
+					결제uid : ${history.impUid}<br>
+					결제방식 : ${history.payMethod}<br>
+					결제번호 : ${history.applyNum}<br>
+					할부 : ${history.quota}<br>
+					상태 : ${history.status}<br>
+					결제일 : ${history.timeStamp}<br>
+					취소일 : ${history.cancleDate}<br>
+					</div>
+			</div>
+			<div class="mb-3">
+			</div>
+		</div>
+	<jsp:include page="../common/footer.jsp"/>
+	</div>
+</body>
+</html>
